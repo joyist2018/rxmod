@@ -13,18 +13,18 @@
 	作者:Phil Bradley
 	* descrp:rxmod
 	*版本:1.0.1
-	*链接:psbj.github.io
+	*链接:https://github.com/joyist2018/rxmod  or psbj.github.io
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	更改日志:
 1.0.1(14 - 1 - 2018)
 	- RXMod源不再是私有的
-	-蹲下来充电,为charger给上钩拳
-	-蹲下来充电,为speittr暂时隐身和速度提升
-	-蹲下来充电,为hunter猛扑
-	-蹲下来作为侦察来进行超级跳跃式充电
-	-变得无形，无声，却不像猎人那样移动
-	-为smoker增加远距传送声音
-	-当您作为充电器产生时，修复受感染的选择不起作用
+	-独臂牛Charger: 上勾拳-蹲下充能;
+	-口水婆Spitter：隐身和曾速-蹲下充能;
+	-猎人Hunter：突袭猛扑伤害-蹲下充能;
+	-侦察Recon：超级跳跃-蹲下充能;
+	-猎人Hunter：不动的时候变成隐形的，无声的;
+	-烟鬼Smoker：增加瞬移声音效果;远距传送声音
+	-一般General：当你开始做独臂牛Charger时，修复特感选择不会起作用.
 1.0.0(18 - 2月- 2016)
 	——最初版本。
 	
@@ -133,7 +133,7 @@
 ========================================================================================
 
 		要执行:
-			-[]坦克:蹲伏冲锋射击
+			-[]坦克:火焰升龙拳-蹲下充能
 
 ======================================================================================*/
 
@@ -155,12 +155,12 @@
 
 #pragma semicolon						1
 
-#define PLUGIN_NAME 					"RXMod"
-#define PLUGIN_AUTHOR 					"Phil Bradley"
+#define PLUGIN_NAME 					"漫步云端MOD"
+#define PLUGIN_AUTHOR 					"Phil Bradley,Joyist"
 #define PLUGIN_DESCRIPTION 				"改良的 XPM Mod"
 #define PLUGIN_VERSION 					"1.0.1"
-#define PLUGIN_URL	 					"steamcommunity.com/groups/rxmod"
-#define PLUGIN_PREFIX 					"\x04[漫步云端]\x01"
+#define PLUGIN_URL	 					"https://github.com/joyist2018/rxmod"
+#define PLUGIN_PREFIX 					"\x04[漫步云端MOD]\x01"
 #define PLUGIN_COMMAND					"!rxm"
 
 #define NAME_DATABASE					"rxmod"
@@ -1673,7 +1673,7 @@ public Action:Command_BindTwo(client, args)
 			new weapon_entity = GetPlayerWeaponSlot(client, 0);
 			SetEntityRenderMode(weapon_entity, RENDER_TRANSCOLOR);
 			SetEntityRenderColor(weapon_entity, 0, 0, 0, 0);
-			PrintHintText(client, "您现在对接下来的15秒无形!");
+			PrintHintText(client, "您现在对接下来的15秒隐形!");
 			g_hInvisibility[client] = CreateTimer(15.0, Timer_Invisibility, client);
 			g_hBindTwoCooldown[client] = CreateTimer(60.0, Timer_BindTwoCooldown, client);
 			return Plugin_Handled;
@@ -3196,7 +3196,7 @@ public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:ang
 					{
 						if (g_bReconJumpActive[client])
 						{
-							PrintHintText(client, "跳跃 charged!");
+							PrintHintText(client, "跳跃 充能!");
 						}
 
 						else if (g_bReconJumpCooldown[client])
@@ -3213,7 +3213,7 @@ public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:ang
 								else { Format(sCooldownTime, sizeof(sCooldownTime), "%ds", iSeconds); }
 							}
 
-							PrintHintText(client, "必须等待 %s  charging才可以跳跃!", sCooldownTime);
+							PrintHintText(client, "必须等待 %s  充能后才可以跳跃!", sCooldownTime);
 						}
 
 						else if (g_bReconJumpCharging[client])
@@ -3232,7 +3232,7 @@ public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:ang
 									else { Format(sCooldownTime, sizeof(sCooldownTime), "%ds", iSeconds); }
 								}
 
-								PrintHintText(client, "charged可以跳跃 %s!", sCooldownTime);
+								PrintHintText(client, "可以跳跃 %s!", sCooldownTime);
 							}
 
 							else
@@ -3304,7 +3304,7 @@ public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:ang
 					{
 						if (g_bChargerUppercutActive[client])
 						{
-							PrintHintText(client, "上钩拳charged!");
+							PrintHintText(client, "上钩拳充能!");
 						}
 
 						else if (g_bChargerUppercutCooldown[client])
@@ -3321,7 +3321,7 @@ public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:ang
 								else { Format(sCooldownTime, sizeof(sCooldownTime), "%ds", iSeconds); }
 							}
 
-							PrintHintText(client, "charging上钩拳你必须等待%s !", sCooldownTime);
+							PrintHintText(client, "充能上钩拳你必须等待%s !", sCooldownTime);
 						}
 
 						else if (g_bChargerUppercutCharging[client])
@@ -3340,7 +3340,7 @@ public Action:OnPlayerRunCmd(client, &buttons, &impulse, Float:vel[3], Float:ang
 									else { Format(sCooldownTime, sizeof(sCooldownTime), "%ds", iSeconds); }
 								}
 
-								PrintHintText(client, "charging上钩拳 %s!", sCooldownTime);
+								PrintHintText(client, "充能上钩拳 %s!", sCooldownTime);
 							}
 
 							else
@@ -4404,11 +4404,11 @@ public DisplayMainPanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n等级: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n健康: %s\n电脑人: %s\n \n                感染者\n \n等级 1: %s\n等级 2: %s\n技能 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Main, sTitle);
-	DrawPanelItem(Panel_Main, "Classes");
-	DrawPanelItem(Panel_Main, "Equipment");
-	DrawPanelItem(Panel_Main, "Options");
-	if (!IsPlayerConfirmed(client)) { DrawPanelItem(Panel_Main, "Confirm"); }
-	DrawPanelItem(Panel_Main, "Exit");
+	DrawPanelItem(Panel_Main, "天赋|Classes");
+	DrawPanelItem(Panel_Main, "装备|Equipment");
+	DrawPanelItem(Panel_Main, "选项|Options");
+	if (!IsPlayerConfirmed(client)) { DrawPanelItem(Panel_Main, "确认|Confirm"); }
+	DrawPanelItem(Panel_Main, "退出|Exit");
 
 	SendPanelToClient(Panel_Main, client, Panel_Main_Handle, 60);
 	CloseHandle(Panel_Main);
@@ -4534,11 +4534,11 @@ public DisplayClassesPanel(client)
 {
 	new Handle:Panel_Classes = CreatePanel();
 	new String:sTitle[512];
-	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n技能: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n健康: %s\n电脑人: %s\n \n                感染者\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
+	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n技能: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n健康: %s\n提升: %s\n \n                感染者\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Classes, sTitle);
-	DrawPanelItem(Panel_Classes, "Survivors");
-	DrawPanelItem(Panel_Classes, "Infected");
-	DrawPanelItem(Panel_Classes, "Back");
+	DrawPanelItem(Panel_Classes, "幸存者|Survivors");
+	DrawPanelItem(Panel_Classes, "感染者|Infected");
+	DrawPanelItem(Panel_Classes, "返回|Back");
 
 	SendPanelToClient(Panel_Classes, client, Panel_Classes_Handle, 60);
 	CloseHandle(Panel_Classes);
@@ -4592,12 +4592,12 @@ public DisplaySurvivorsPanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n健康: %s\n电脑人: %s\n \n                感染者\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Survivors, sTitle);
-	if (IsClassProtector(client)) { DrawPanelItem(Panel_Survivors, "Protector [x]"); } else { DrawPanelItem(Panel_Survivors, "Protector [ ]"); }
-	if (IsClassCommando(client)) { DrawPanelItem(Panel_Survivors, "Commando [x]"); } else { DrawPanelItem(Panel_Survivors, "Commando [ ]"); }
-	if (IsClassSupport(client)) { DrawPanelItem(Panel_Survivors, "Support [x]"); } else { DrawPanelItem(Panel_Survivors, "Support [ ]"); }
-	if (IsClassMedic(client)) { DrawPanelItem(Panel_Survivors, "Medic [x]"); } else { DrawPanelItem(Panel_Survivors, "Medic [ ]"); }
-	if (IsClassRecon(client)) { DrawPanelItem(Panel_Survivors, "Recon [x]"); } else { DrawPanelItem(Panel_Survivors, "Recon [ ]"); }
-	DrawPanelItem(Panel_Survivors, "Back");
+	if (IsClassProtector(client)) { DrawPanelItem(Panel_Survivors, "守护者|Protector [x]"); } else { DrawPanelItem(Panel_Survivors, "守护者|Protector [ ]"); }
+	if (IsClassCommando(client)) { DrawPanelItem(Panel_Survivors, "突击队|Commando [x]"); } else { DrawPanelItem(Panel_Survivors, "突击队|Commando [ ]"); }
+	if (IsClassSupport(client)) { DrawPanelItem(Panel_Survivors, "支援|Support [x]"); } else { DrawPanelItem(Panel_Survivors, "支援|Support [ ]"); }
+	if (IsClassMedic(client)) { DrawPanelItem(Panel_Survivors, "医生|Medic [x]"); } else { DrawPanelItem(Panel_Survivors, "医生|Medic [ ]"); }
+	if (IsClassRecon(client)) { DrawPanelItem(Panel_Survivors, "侦察|Recon [x]"); } else { DrawPanelItem(Panel_Survivors, "侦察|Recon [ ]"); }
+	DrawPanelItem(Panel_Survivors, "返回|Back");
 
 	SendPanelToClient(Panel_Survivors, client, Panel_Survivors_Handle, 60);
 	CloseHandle(Panel_Survivors);
@@ -4612,7 +4612,7 @@ public Panel_Survivors_Handle(Handle:Panel_Survivors, MenuAction:action, client,
 		{
 			if (!StrEqual(g_sSurvClass[client], "") && !IsClassProtector(client))
 			{
-				PrintHintText(client, "在选择另一个幸存者之前取消选择!");
+				PrintHintText(client, "在选择另一个幸存者天赋之前取消选择!");
 				EmitSoundToClient(client, SOUND_MENU_SELECT);
 				DisplaySurvivorsPanel(client);
 			}
@@ -4626,7 +4626,7 @@ public Panel_Survivors_Handle(Handle:Panel_Survivors, MenuAction:action, client,
 
 			else if (StrEqual(g_sSurvClass[client], ""))
 			{
-				Format(g_sSurvClass[client], sizeof(g_sSurvClass[]), "Protector");
+				Format(g_sSurvClass[client], sizeof(g_sSurvClass[]), "守护者|Protector");
 				EmitSoundToClient(client, SOUND_MENU_SELECT);
 				DisplaySurvivorsPanel(client);
 			}
@@ -4636,7 +4636,7 @@ public Panel_Survivors_Handle(Handle:Panel_Survivors, MenuAction:action, client,
 		{
 			if (!StrEqual(g_sSurvClass[client], "") && !IsClassCommando(client))
 			{
-				PrintHintText(client, "在选择另一个幸存者之前取消选择!");
+				PrintHintText(client, "在选择另一个幸存者天赋之前取消选择!");
 				EmitSoundToClient(client, SOUND_MENU_SELECT);
 				DisplaySurvivorsPanel(client);
 			}
@@ -4650,7 +4650,7 @@ public Panel_Survivors_Handle(Handle:Panel_Survivors, MenuAction:action, client,
 
 			else if (StrEqual(g_sSurvClass[client], ""))
 			{
-				Format(g_sSurvClass[client], sizeof(g_sSurvClass[]), "Commando");
+				Format(g_sSurvClass[client], sizeof(g_sSurvClass[]), "突击队|Commando");
 				EmitSoundToClient(client, SOUND_MENU_SELECT);
 				DisplaySurvivorsPanel(client);
 			}
@@ -4674,7 +4674,7 @@ public Panel_Survivors_Handle(Handle:Panel_Survivors, MenuAction:action, client,
 
 			else if (StrEqual(g_sSurvClass[client], ""))
 			{
-				Format(g_sSurvClass[client], sizeof(g_sSurvClass[]), "Support");
+				Format(g_sSurvClass[client], sizeof(g_sSurvClass[]), "支援|Support");
 				EmitSoundToClient(client, SOUND_MENU_SELECT);
 				DisplaySurvivorsPanel(client);
 			}
@@ -4698,7 +4698,7 @@ public Panel_Survivors_Handle(Handle:Panel_Survivors, MenuAction:action, client,
 
 			else if (StrEqual(g_sSurvClass[client], ""))
 			{
-				Format(g_sSurvClass[client], sizeof(g_sSurvClass[]), "Medic");
+				Format(g_sSurvClass[client], sizeof(g_sSurvClass[]), "医生|Medic");
 				EmitSoundToClient(client, SOUND_MENU_SELECT);
 				DisplaySurvivorsPanel(client);
 			}
@@ -4722,7 +4722,7 @@ public Panel_Survivors_Handle(Handle:Panel_Survivors, MenuAction:action, client,
 
 			else if (StrEqual(g_sSurvClass[client], ""))
 			{
-				Format(g_sSurvClass[client], sizeof(g_sSurvClass[]), "Recon");
+				Format(g_sSurvClass[client], sizeof(g_sSurvClass[]), "侦察|Recon");
 				EmitSoundToClient(client, SOUND_MENU_SELECT);
 				DisplaySurvivorsPanel(client);
 			}
@@ -4746,7 +4746,7 @@ public Panel_Survivors_Handle(Handle:Panel_Survivors, MenuAction:action, client,
 
 
 //============================================================================================================================================================================================================================================
-//																							感染的面板	INFECTED PANEL
+//																							感染者面板	INFECTED PANEL
 //============================================================================================================================================================================================================================================
 
 
@@ -4759,13 +4759,13 @@ public DisplayInfectedPanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n电脑人: %s\n \n                感染者\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Infected, sTitle);
-	if (StrEqual(g_sInfClassOne[client], "Boomer") || StrEqual(g_sInfClassTwo[client], "Boomer") || StrEqual(g_sInfClassThree[client], "Boomer")) { DrawPanelItem(Panel_Infected, "Boomer [x]"); } else { DrawPanelItem(Panel_Infected, "Boomer [ ]"); }
-	if (StrEqual(g_sInfClassOne[client], "Charger") || StrEqual(g_sInfClassTwo[client], "Charger") || StrEqual(g_sInfClassThree[client], "Charger")) { DrawPanelItem(Panel_Infected, "Charger [x]"); } else { DrawPanelItem(Panel_Infected, "Charger [ ]"); }
-	if (StrEqual(g_sInfClassOne[client], "Hunter") || StrEqual(g_sInfClassTwo[client], "Hunter") || StrEqual(g_sInfClassThree[client], "Hunter")) { DrawPanelItem(Panel_Infected, "Hunter [x]"); } else { DrawPanelItem(Panel_Infected, "Hunter [ ]"); }
-	if (StrEqual(g_sInfClassOne[client], "Jockey") || StrEqual(g_sInfClassTwo[client], "Jockey") || StrEqual(g_sInfClassThree[client], "Jockey")) { DrawPanelItem(Panel_Infected, "Jockey [x]"); } else { DrawPanelItem(Panel_Infected, "Jockey [ ]"); }
-	if (StrEqual(g_sInfClassOne[client], "Smoker") || StrEqual(g_sInfClassTwo[client], "Smoker") || StrEqual(g_sInfClassThree[client], "Smoker")) { DrawPanelItem(Panel_Infected, "Smoker [x]"); } else { DrawPanelItem(Panel_Infected, "Smoker [ ]"); }
-	if (StrEqual(g_sInfClassOne[client], "Spitter") || StrEqual(g_sInfClassTwo[client], "Spitter") || StrEqual(g_sInfClassThree[client], "Spitter")) { DrawPanelItem(Panel_Infected, "Spitter [x]"); } else { DrawPanelItem(Panel_Infected, "Spitter [ ]"); }
-	DrawPanelItem(Panel_Infected, "Back");
+	if (StrEqual(g_sInfClassOne[client], "胖子|Boomer") || StrEqual(g_sInfClassTwo[client], "胖子|Boomer") || StrEqual(g_sInfClassThree[client], "胖子|Boomer")) { DrawPanelItem(Panel_Infected, "胖子|Boomer [x]"); } else { DrawPanelItem(Panel_Infected, "胖子Boomer [ ]"); }
+	if (StrEqual(g_sInfClassOne[client], "独臂牛|Charger") || StrEqual(g_sInfClassTwo[client], "独臂牛|Charger") || StrEqual(g_sInfClassThree[client], "独臂牛|Charger")) { DrawPanelItem(Panel_Infected, "独臂牛|Charger [x]"); } else { DrawPanelItem(Panel_Infected, "独臂牛|Charger [ ]"); }
+	if (StrEqual(g_sInfClassOne[client], "猎人|Hunter") || StrEqual(g_sInfClassTwo[client], "猎人|Hunter") || StrEqual(g_sInfClassThree[client], "猎人|Hunter")) { DrawPanelItem(Panel_Infected, "猎人|Hunter [x]"); } else { DrawPanelItem(Panel_Infected, "猎人|Hunter [ ]"); }
+	if (StrEqual(g_sInfClassOne[client], "猴子|Jockey") || StrEqual(g_sInfClassTwo[client], "猴子|Jockey") || StrEqual(g_sInfClassThree[client], "猴子|Jockey")) { DrawPanelItem(Panel_Infected, "猴子|Jockey [x]"); } else { DrawPanelItem(Panel_Infected, "猴子|Jockey [ ]"); }
+	if (StrEqual(g_sInfClassOne[client], "烟鬼|Smoker") || StrEqual(g_sInfClassTwo[client], "烟鬼|Smoker") || StrEqual(g_sInfClassThree[client], "烟鬼|Smoker")) { DrawPanelItem(Panel_Infected, "烟鬼|Smoker [x]"); } else { DrawPanelItem(Panel_Infected, "烟鬼|Smoker [ ]"); }
+	if (StrEqual(g_sInfClassOne[client], "口水婆|Spitter") || StrEqual(g_sInfClassTwo[client], "口水婆|Spitter") || StrEqual(g_sInfClassThree[client], "口水婆|Spitter")) { DrawPanelItem(Panel_Infected, "口水婆|Spitter [x]"); } else { DrawPanelItem(Panel_Infected, "口水婆|Spitter [ ]"); }
+	DrawPanelItem(Panel_Infected, "返回|Back");
 
 	SendPanelToClient(Panel_Infected, client, Panel_Infected_Handle, 60);
 	CloseHandle(Panel_Infected);
@@ -5117,14 +5117,14 @@ public DisplayEquipmentPanel(client)
 {
 	new Handle:Panel_Equipment = CreatePanel();
 	new String:sTitle[512];
-	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器 %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n加速: %s\n \n                感染者\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
+	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器 %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n提升: %s\n \n                感染者\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Equipment, sTitle);
-	DrawPanelItem(Panel_Equipment, "Primary");
-	DrawPanelItem(Panel_Equipment, "Secondary");
-	DrawPanelItem(Panel_Equipment, "Throwable");
-	DrawPanelItem(Panel_Equipment, "Health");
-	DrawPanelItem(Panel_Equipment, "Boost");
-	DrawPanelItem(Panel_Equipment, "Back");
+	DrawPanelItem(Panel_Equipment, "主武器|Primary");
+	DrawPanelItem(Panel_Equipment, "近战|Secondary");
+	DrawPanelItem(Panel_Equipment, "投掷|Throwable");
+	DrawPanelItem(Panel_Equipment, "生命|Health");
+	DrawPanelItem(Panel_Equipment, "提升|Boost");
+	DrawPanelItem(Panel_Equipment, "返回|Back");
 
 	SendPanelToClient(Panel_Equipment, client, Panel_Equipment_Handle, 60);
 	CloseHandle(Panel_Equipment);
@@ -5196,10 +5196,10 @@ public DisplayPrimaryPanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n提升: %s\n \n                特感\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Primary, sTitle);
-	DrawPanelItem(Panel_Primary, "Assault Rifles");
-	DrawPanelItem(Panel_Primary, "Sniper Rifles");
-	DrawPanelItem(Panel_Primary, "Shotguns");
-	DrawPanelItem(Panel_Primary, "Back");
+	DrawPanelItem(Panel_Primary, "突击步枪|Assault Rifles");
+	DrawPanelItem(Panel_Primary, "狙击步枪|Sniper Rifles");
+	DrawPanelItem(Panel_Primary, "散弹枪|Shotguns");
+	DrawPanelItem(Panel_Primary, "返回|Back");
 
 	SendPanelToClient(Panel_Primary, client, Panel_Primary_Handle, 60);
 	CloseHandle(Panel_Primary);
@@ -5263,7 +5263,7 @@ public DisplayAssaultRiflePanel(client)
 	DrawPanelItem(Panel_AssaultRifle, "SCAR-L");
 	DrawPanelItem(Panel_AssaultRifle, "AK-47");
 	DrawPanelItem(Panel_AssaultRifle, "SIG SG552");
-	DrawPanelItem(Panel_AssaultRifle, "Back");
+	DrawPanelItem(Panel_AssaultRifle, "返回|Back");
 
 	SendPanelToClient(Panel_AssaultRifle, client, Panel_AssaultRifle_Handle, 60);
 	CloseHandle(Panel_AssaultRifle);
@@ -5341,7 +5341,7 @@ public DisplaySniperRiflePanel(client)
 	DrawPanelItem(Panel_SniperRifle, "MSG90A1");
 	DrawPanelItem(Panel_SniperRifle, "Scout");
 	DrawPanelItem(Panel_SniperRifle, "AWP");
-	DrawPanelItem(Panel_SniperRifle, "Back");
+	DrawPanelItem(Panel_SniperRifle, "返回|Back");
 
 	SendPanelToClient(Panel_SniperRifle, client, Panel_SniperRifle_Handle, 60);
 	CloseHandle(Panel_SniperRifle);
@@ -5417,7 +5417,7 @@ public DisplayShotgunPanel(client)
 	SetPanelTitle(Panel_Shotgun, sTitle);
 	DrawPanelItem(Panel_Shotgun, "M1014");
 	DrawPanelItem(Panel_Shotgun, "SPAS-12");
-	DrawPanelItem(Panel_Shotgun, "Back");
+	DrawPanelItem(Panel_Shotgun, "返回|Back");
 
 	SendPanelToClient(Panel_Shotgun, client, Panel_Shotgun_Handle, 60);
 	CloseHandle(Panel_Shotgun);
@@ -5475,9 +5475,9 @@ public DisplaySecondaryPanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n提升: %s\n \n                特感\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Secondary, sTitle);
-	DrawPanelItem(Panel_Secondary, "Pistols");
-	DrawPanelItem(Panel_Secondary, "Melee");
-	DrawPanelItem(Panel_Secondary, "Back");
+	DrawPanelItem(Panel_Secondary, "手枪|Pistols");
+	DrawPanelItem(Panel_Secondary, "近战|Melee");
+	DrawPanelItem(Panel_Secondary, "返回|Back");
 
 	SendPanelToClient(Panel_Secondary, client, Panel_Secondary_Handle, 60);
 	CloseHandle(Panel_Secondary);
@@ -5531,9 +5531,9 @@ public DisplayPistolsPanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n提升: %s\n \n                特感\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Pistols, sTitle);
-	DrawPanelItem(Panel_Pistols, "Dual Pistols");
-	DrawPanelItem(Panel_Pistols, "Magnum");
-	DrawPanelItem(Panel_Pistols, "Back");
+	DrawPanelItem(Panel_Pistols, "双手枪|Dual Pistols");
+	DrawPanelItem(Panel_Pistols, "玛格南|Magnum");
+	DrawPanelItem(Panel_Pistols, "返回|Back");
 
 	SendPanelToClient(Panel_Pistols, client, Panel_Pistols_Handle, 60);
 	CloseHandle(Panel_Pistols);
@@ -5591,12 +5591,12 @@ public DisplayMeleePanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n提升: %s\n \n                特感\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Melee, sTitle);
-	DrawPanelItem(Panel_Melee, "Katana");
-	DrawPanelItem(Panel_Melee, "Machete");
-	DrawPanelItem(Panel_Melee, "Baseball Bat");
-	DrawPanelItem(Panel_Melee, "Frying Pan");
-	DrawPanelItem(Panel_Melee, "Chainsaw");
-	DrawPanelItem(Panel_Melee, "Back");
+	DrawPanelItem(Panel_Melee, "武士刀|Katana");
+	DrawPanelItem(Panel_Melee, "砍刀|Machete");
+	DrawPanelItem(Panel_Melee, "棒球棒|Baseball Bat");
+	DrawPanelItem(Panel_Melee, "平底锅|Frying Pan");
+	DrawPanelItem(Panel_Melee, "电锯|Chainsaw");
+	DrawPanelItem(Panel_Melee, "返回|Back");
 
 	SendPanelToClient(Panel_Melee, client, Panel_Melee_Handle, 60);
 	CloseHandle(Panel_Melee);
@@ -5678,10 +5678,10 @@ public DisplayThrowablePanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n提升: %s\n \n                特感\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Throwable, sTitle);
-	DrawPanelItem(Panel_Throwable, "Pipe Bomb");
-	DrawPanelItem(Panel_Throwable, "Molotov");
-	DrawPanelItem(Panel_Throwable, "Bile");
-	DrawPanelItem(Panel_Throwable, "Back");
+	DrawPanelItem(Panel_Throwable, "土制炸弹|Pipe Bomb");
+	DrawPanelItem(Panel_Throwable, "燃烧瓶|Molotov");
+	DrawPanelItem(Panel_Throwable, "胆汁|Bile");
+	DrawPanelItem(Panel_Throwable, "返回|Back");
 
 	SendPanelToClient(Panel_Throwable, client, Panel_Throwable_Handle, 60);
 	CloseHandle(Panel_Throwable);
@@ -5747,9 +5747,9 @@ public DisplayHealthPanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n提升: %s\n \n                特感\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Health, sTitle);
-	DrawPanelItem(Panel_Health, "First Aid Kit");
-	DrawPanelItem(Panel_Health, "Defibrillator");
-	DrawPanelItem(Panel_Health, "Back");
+	DrawPanelItem(Panel_Health, "医疗包|First Aid Kit");
+	DrawPanelItem(Panel_Health, "电击器|Defibrillator");
+	DrawPanelItem(Panel_Health, "返回|Back");
 
 	SendPanelToClient(Panel_Health, client, Panel_Health_Handle, 60);
 	CloseHandle(Panel_Health);
@@ -5794,7 +5794,7 @@ public Panel_Health_Handle(Handle:Panel_Health, MenuAction:action, client, param
 
 
 //============================================================================================================================================================================================================================================
-//																							加速提升面板	BOOST PANEL
+//																							提升加速面板	BOOST PANEL
 //============================================================================================================================================================================================================================================
 
 
@@ -5807,9 +5807,9 @@ public DisplayBoostPanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n提升: %s\n \n                特感\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Boost, sTitle);
-	DrawPanelItem(Panel_Boost, "Pills");
-	DrawPanelItem(Panel_Boost, "Adrenaline");
-	DrawPanelItem(Panel_Boost, "Back");
+	DrawPanelItem(Panel_Boost, "药丸|Pills");
+	DrawPanelItem(Panel_Boost, "肾上腺素|Adrenaline");
+	DrawPanelItem(Panel_Boost, "返回|Back");
 
 	SendPanelToClient(Panel_Boost, client, Panel_Boost_Handle, 60);
 	CloseHandle(Panel_Boost);
@@ -5867,9 +5867,9 @@ public DisplayOptionsPanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n提升: %s\n \n                特感\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Options, sTitle);
-	DrawPanelItem(Panel_Options, "Stats");
-	DrawPanelItem(Panel_Options, "Teams");
-	DrawPanelItem(Panel_Options, "Back");
+	DrawPanelItem(Panel_Options, "统计|Stats");
+	DrawPanelItem(Panel_Options, "团队|Teams");
+	DrawPanelItem(Panel_Options, "返回|Back");
 
 	SendPanelToClient(Panel_Options, client, Panel_Options_Handle, 60);
 	CloseHandle(Panel_Options);
@@ -5948,7 +5948,7 @@ public DisplayStatsPanel(client)
 
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n                 普通\n \n总时间: %s \n最后扮演: %s \n上次服务器: %s \n \n               幸存者\n \n常规_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, sTimePlayed, sLastSession, g_sLastServer[client], g_iSurvivorCommonKills[client], g_iSurvivorSpecialKills[client], g_iSurvivorTankKills[client], g_iSurvivorWitchKills[client], g_iSurvivorSurvivorIncaps[client], g_iSurvivorSurvivorDeaths[client], g_iInfectedSurvivorDamage[client], g_iInfectedSurvivorIncaps[client], g_iInfectedSurvivorKills[client], g_iInfectedSpecialDeaths[client]);
 	SetPanelTitle(Panel_Stats, sTitle);
-	DrawPanelItem(Panel_Stats, "Back");
+	DrawPanelItem(Panel_Stats, "返回|Back");
 
 
 	SendPanelToClient(Panel_Stats, client, Panel_Stats_Handle, 1);
@@ -5998,10 +5998,10 @@ public DisplayTeamsPanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n提升: %s\n \n                特感\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Teams, sTitle);
-	DrawPanelItem(Panel_Teams, "Spectator");
-	DrawPanelItem(Panel_Teams, "Survivors");
-	DrawPanelItem(Panel_Teams, "Infected");
-	DrawPanelItem(Panel_Teams, "Back");
+	DrawPanelItem(Panel_Teams, "旁观者|Spectator");
+	DrawPanelItem(Panel_Teams, "幸存者|Survivors");
+	DrawPanelItem(Panel_Teams, "感染者|Infected");
+	DrawPanelItem(Panel_Teams, "返回|Back");
 
 	SendPanelToClient(Panel_Teams, client, Panel_Teams_Handle, 60);
 	CloseHandle(Panel_Teams);
@@ -6140,9 +6140,9 @@ public DisplayMedicPanel(client)
 	new String:sTitle[512];
 	Format(sTitle, sizeof(sTitle), "             %s (v%s)\n_______________________________\n \n               幸存者\n \n天赋: %s\n主武器: %s\n近战武器: %s\n投掷武器: %s\n生命: %s\n提升: %s\n \n                特感\n \n天赋 1: %s\n天赋 2: %s\n天赋 3: %s\n_______________________________\n ", PLUGIN_NAME, PLUGIN_VERSION, g_sSurvClass[client], g_sPrimary[client], g_sSecondary[client], g_sGrenade[client], g_sHealth[client], g_sBoost[client], g_sInfClassOne[client], g_sInfClassTwo[client], g_sInfClassThree[client]);
 	SetPanelTitle(Panel_Medic, sTitle);
-	DrawPanelItem(Panel_Medic, "Heal (1 bind)");
-	DrawPanelItem(Panel_Medic, "Revive (2 binds)");
-	DrawPanelItem(Panel_Medic, "Resurrect (3 binds)");
+	DrawPanelItem(Panel_Medic, "治疗(绑定1)|Heal (1 bind)");
+	DrawPanelItem(Panel_Medic, "恢复(绑定2)|Revive (2 binds)");
+	DrawPanelItem(Panel_Medic, "复活(绑定3)|Resurrect (3 binds)");
 
 	SendPanelToClient(Panel_Medic, client, Panel_Medic_Handle, 60);
 	CloseHandle(Panel_Medic);
