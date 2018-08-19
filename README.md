@@ -1,5 +1,5 @@
 # rxmod
-Revamped XPM Mod
+改良的 XPM Mod
 
 特点:
 独臂牛Charger: 上勾拳-蹲下充能
